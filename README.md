@@ -41,6 +41,8 @@ No benchmarks yet!
 
 Create a `.env` file in the repository root with one `KEY=value` per line. Use double underscores (`__`) for nested configuration keys.
 
+Run `bash script/export-options.sh` to build all projects and generate `sample.env` from the compiled options types. It includes type comments and property defaults; empty collections get an example entry at index `0`. Copy it to `.env`, fill in credentials, and replace or remove example collection entries before running. An optional first argument selects a different output file.
+
 Build and start the container from the repository root:
 
 ```bash
