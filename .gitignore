@@ -134,3 +134,4 @@ _Pvt_Extensions
 # Extended
 FodyWeavers.xsd
 .env
+.idea/
