@@ -2,5 +2,6 @@
   <Folder Name="/Test/">
   </Folder>
   <Folder Name="/Src/">
+    <Project Path="src/FurBot/FurBot.csproj" />
   </Folder>
 </Solution>
