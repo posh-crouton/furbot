@@ -8,7 +8,7 @@ Inspired by [erraineon/Beef](https://github.com/erraineon/Beef). Discord bot to 
 
 ## 📋 Prerequisites
 
-.NET 6.0 SDK or newer. Get started with [script/dotnet-install.sh](./script/dotnet-install.sh) (Linux/MacOS) or [script/dotnet-isntall.ps1](./script/dotnet-install.ps1) (Windows) if you don't have it already. 
+.NET 10.0 SDK. Get started with [script/dotnet-install.sh](./script/dotnet-install.sh) (Linux/MacOS) or [script/dotnet-install.ps1](./script/dotnet-install.ps1) (Windows) if you don't have it already. Docker deployments only require Docker with Linux container support.
 
 ## 🚀 Get started
 
@@ -17,7 +17,7 @@ Inspired by [erraineon/Beef](https://github.com/erraineon/Beef). Discord bot to 
 
 ## ▶️ Run
 
-To run locally, use the below command. In production, it's recommended to use Docker (coming soon) instead.
+To run locally, use the below command. For production, see the Docker instructions under Deploy.
 
 ```bash
 cd src/FurBot && dotnet run 
@@ -39,7 +39,14 @@ No benchmarks yet!
 
 ## 🛳️ Deploy
 
-No deploy strategy yet! 
+Create a `.env` file in the repository root with one `KEY=value` per line. Use double underscores (`__`) for nested configuration keys.
+
+Build and start the container from the repository root:
+
+```bash
+docker build -t furbot .
+docker run -d --name furbot --restart unless-stopped --env-file .env furbot
+```
 
 ## ⚖️ Licensing
 
