@@ -10,9 +10,9 @@ namespace FurBot.Services.Polling;
 internal abstract class PollingServiceBase : BackgroundService
 {
     private readonly IMessenger _messenger;
-    private readonly IOptions<PollingServiceOptions> _options;
+    private readonly IOptionsMonitor<PollingServiceOptions> _options;
 
-    protected PollingServiceBase(IMessenger messenger, IOptions<PollingServiceOptions> options)
+    protected PollingServiceBase(IMessenger messenger, IOptionsMonitor<PollingServiceOptions> options)
     {
         _messenger = messenger;
         _options = options;
@@ -30,7 +30,7 @@ internal abstract class PollingServiceBase : BackgroundService
                 _messenger.Send(new PostPublishedMessage { Post = post });
             }
 
-            await Task.Delay(_options.Value.IntervalMs, stoppingToken);
+            await Task.Delay(_options.CurrentValue.IntervalMs, stoppingToken);
         }
     }
 }

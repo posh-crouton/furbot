@@ -9,12 +9,12 @@ namespace FurBot.Services.Polling;
 
 internal sealed class GelbooruPollingService : PollingServiceBase
 {
-    private readonly IOptions<GelbooruOptions> _gelbooruOptions;
+    private readonly IOptionsMonitor<GelbooruOptions> _gelbooruOptions;
     private readonly IGelbooruClient _gelbooruClient;
 
     public GelbooruPollingService(IMessenger messenger,
-        IOptions<PollingServiceOptions> options,
-        IOptions<GelbooruOptions> gelbooruOptions,
+        IOptionsMonitor<PollingServiceOptions> options,
+        IOptionsMonitor<GelbooruOptions> gelbooruOptions,
         IGelbooruClient gelbooruClient)
         : base(messenger, options)
     {
@@ -26,16 +26,16 @@ internal sealed class GelbooruPollingService : PollingServiceBase
     {
         _gelbooruClient.Init();
 
-        IEnumerable<GelbooruPost> posts = await _gelbooruClient.GetPostsAsync(_gelbooruOptions.Value.Query,
-            _gelbooruOptions.Value.PostLimit,
+        IEnumerable<GelbooruPost> posts = await _gelbooruClient.GetPostsAsync(_gelbooruOptions.CurrentValue.Query,
+            _gelbooruOptions.CurrentValue.PostLimit,
             ct);
 
         return posts.Select(post => new Post
         {
             Title = $"By {string.Join(", ", post.Tags.Artist)}",
             ImageUri = post.File.Url ?? string.Empty,
-            SourceWebsiteName = _gelbooruOptions.Value.InstanceName,
-            PostUri = $"{_gelbooruOptions.Value.InstanceUri}/posts/{post.Id}"
+            SourceWebsiteName = _gelbooruOptions.CurrentValue.InstanceName,
+            PostUri = $"{_gelbooruOptions.CurrentValue.InstanceUri}/posts/{post.Id}"
         });
     }
 }
