@@ -102,7 +102,8 @@ using var writer = new StreamWriter(args[1], false, new UTF8Encoding(false));
 writer.NewLine = "\n";
 foreach (var (key, entry) in entries)
 {
-    writer.WriteLine($"{key}={entry.Value} # {entry.Type}");
+    writer.WriteLine($"# {entry.Type}");
+    writer.WriteLine($"{key}={entry.Value}");
 }
 
 object? Create(Type type) => type.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic |
