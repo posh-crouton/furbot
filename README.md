@@ -47,7 +47,18 @@ Build and start the container from the repository root:
 
 ```bash
 docker build -t furbot .
-docker run -d --name furbot --restart unless-stopped --env-file .env furbot
+docker run -d --name furbot --restart unless-stopped --env-file .env --mount source=furbot-logs,target=/app/logs furbot
+```
+
+### Updating an existing deployment
+
+After `git pull`, run from the repository root:
+
+```bash
+docker build -t furbot .
+docker stop furbot
+docker rm furbot
+docker run -d --name furbot --restart unless-stopped --env-file .env --mount source=furbot-logs,target=/app/logs furbot
 ```
 
 ## ⚖️ Licensing
