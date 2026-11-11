@@ -1,4 +1,4 @@
-﻿using FurBot.Ioc;
+using FurBot.Ioc;
 using Microsoft.Extensions.Hosting;
 
 namespace FurBot;

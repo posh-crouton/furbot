@@ -136,3 +136,6 @@ FodyWeavers.xsd
 .env
 .idea/
 *.env
+*.db
+*.db-shm
+*.db-wal

@@ -6,7 +6,6 @@ using FurBot.Configuration;
 using FurBot.Types.Gelbooru;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace FurBot.Clients;
 
@@ -79,7 +78,7 @@ internal sealed class GelbooruClient : IGelbooruClient
 
         response.EnsureSuccessStatusCode();
 
-        PostResponse? result = JsonConvert.DeserializeObject<PostResponse>(content);
+        PostResponse? result = JsonSerializer.Deserialize<PostResponse>(content);
         return result?.Posts ?? [];
     }
 
