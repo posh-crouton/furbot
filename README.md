@@ -46,8 +46,7 @@ Run `bash script/export-options.sh` to build all projects and generate `sample.e
 Build and start the container from the repository root:
 
 ```bash
-docker build -t furbot .
-docker run -d --name furbot --restart unless-stopped --env-file .env --mount source=furbot-logs,target=/app/logs furbot
+docker build -t furbot .; docker run --rm --user root --mount source=furbot-data,target=/app/data --entrypoint chown furbot app:app /app/data; docker run -d --name furbot --restart unless-stopped --env-file .env --env "Database__ConnectionString=Data Source=/app/data/furbot.db" --mount source=furbot-logs,target=/app/logs --mount source=furbot-data,target=/app/data furbot
 ```
 
 ### Updating an existing deployment
@@ -55,10 +54,7 @@ docker run -d --name furbot --restart unless-stopped --env-file .env --mount sou
 After `git pull`, run from the repository root:
 
 ```bash
-docker build -t furbot .
-docker stop furbot
-docker rm furbot
-docker run -d --name furbot --restart unless-stopped --env-file .env --mount source=furbot-logs,target=/app/logs furbot
+docker build -t furbot .; docker stop furbot; docker rm furbot; docker run --rm --user root --mount source=furbot-data,target=/app/data --entrypoint chown furbot app:app /app/data; docker run -d --name furbot --restart unless-stopped --env-file .env --env "Database__ConnectionString=Data Source=/app/data/furbot.db" --mount source=furbot-logs,target=/app/logs --mount source=furbot-data,target=/app/data furbot
 ```
 
 ## ⚖️ Licensing
